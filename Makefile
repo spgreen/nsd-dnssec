@@ -1,4 +1,4 @@
-NAME = spgreen/nsd-dnssec:4.12.0
+NAME = spgreen/nsd-dnssec:4.14.0
 
 all: build-no-cache init fixtures run clean
 all-fast: build init fixtures run clean

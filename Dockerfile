@@ -4,14 +4,14 @@ LABEL org.opencontainers.image.authors="Simon Green <simonpetergreen@singaren.ne
 LABEL description="Simple DNS authoritative server with DNSSEC support" \
       maintainer="Simon Green <simonpetergreen@singaren.net.sg>"
 
-ARG NSD_VERSION=4.12.0
+ARG NSD_VERSION=4.14.0
 
 #-----BEGIN PGP PUBLIC KEY BLOCK-----
 #Comment: F8CB 0EFA A130 D9A5 EDC0  429B 7677 5760 1626 5A20
 #Comment: Jannik Peters <jannik@nlnetlabs.nl>
 ARG GPG_SHORTID="0x7677576016265A20"
 ARG GPG_FINGERPRINT="F8CB 0EFA A130 D9A5 EDC0  429B 7677 5760 1626 5A20"
-ARG SHA256_HASH="f9ecc2cf79ba50580f2df62918efc440084c5bf11057db44c19aa9643cd4b5e8"
+ARG SHA256_HASH="5d60e344002a9cc609ab71951a3cdb906314999e42f2a269044f27259ac2f12e"
 
 ENV UID=991 GID=991
 
@@ -25,6 +25,8 @@ RUN apk add --no-cache --virtual build-dependencies \
       ldns \
       ldns-tools \
       libevent \
+      protobuf-c-dev \
+      fstrm-dev \
       openssl \
       tini \
  && cd /tmp \
