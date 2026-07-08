@@ -1,16 +1,17 @@
-FROM alpine:3.20.0
-MAINTAINER Simon Green <simonpetergreen@singaren.net.sg>
+FROM alpine:3.24.1
 
-LABEL description "Simple DNS authoritative server with DNSSEC support" \
-      maintainer="Simon Green <simonpetergreen@singaren.net.sg>"
+LABEL description="Simple DNS authoritative server with DNSSEC support"
+LABEL maintainer="Simon Green <simonpetergreen@singaren.net.sg>"
 
-ARG NSD_VERSION=4.10.0
+ARG NSD_VERSION=4.15.0
 
 # https://pgp.mit.edu/pks/lookup?search=0x7E045F8D&fingerprint=on&op=index
 # pub  4096R/7E045F8D 2011-04-21 W.C.A. Wijngaards <wouter@nlnetlabs.nl>
-ARG GPG_SHORTID="0x9F6F1C2D7E045F8D"
-ARG GPG_FINGERPRINT="EDFA A3F2 CA4E 6EB0 5681  AF8E 9F6F 1C2D 7E04 5F8D"
-ARG SHA256_HASH="6317d7f5e3f01c33912f313d66a33dd1ace1cdf7f19d5c590b2e430d8ca4605f"
+#ARG GPG_SHORTID="0x9F6F1C2D7E045F8D"
+#ARG GPG_FINGERPRINT="EDFA A3F2 CA4E 6EB0 5681  AF8E 9F6F 1C2D 7E04 5F8D"
+ARG GPG_SHORTID="0xA144323DEAACDF45"
+ARG GPG_FINGERPRINT="2310 1869 0C4D 903E F419  146A A144 323D EAAC DF45"
+ARG SHA256_HASH="84f1bee2e92a9dadb41d95ecc64113e4d3def86224de774cd92003add8c4f570"
 
 ENV UID=991 GID=991
 
@@ -26,6 +27,12 @@ RUN apk add --no-cache --virtual build-dependencies \
       libevent \
       openssl \
       tini \
+      protobuf \
+      protobuf-dev \
+      protobuf-c \
+      protobuf-c-dev \
+      fstrm \
+      fstrm-dev \
  && cd /tmp \
  && wget -q https://www.nlnetlabs.nl/downloads/nsd/nsd-${NSD_VERSION}.tar.gz \
  && wget -q https://www.nlnetlabs.nl/downloads/nsd/nsd-${NSD_VERSION}.tar.gz.asc \
