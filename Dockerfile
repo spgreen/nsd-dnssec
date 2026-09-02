@@ -3,7 +3,7 @@ FROM alpine:3.24.1
 LABEL description="Simple DNS authoritative server with DNSSEC support"
 LABEL maintainer="Simon Green <simonpetergreen@singaren.net.sg>"
 
-ARG NSD_VERSION=4.15.0
+ARG NSD_VERSION=4.15.1
 
 # https://pgp.mit.edu/pks/lookup?search=0x7E045F8D&fingerprint=on&op=index
 # pub  4096R/7E045F8D 2011-04-21 W.C.A. Wijngaards <wouter@nlnetlabs.nl>
@@ -11,7 +11,7 @@ ARG NSD_VERSION=4.15.0
 #ARG GPG_FINGERPRINT="EDFA A3F2 CA4E 6EB0 5681  AF8E 9F6F 1C2D 7E04 5F8D"
 ARG GPG_SHORTID="0xA144323DEAACDF45"
 ARG GPG_FINGERPRINT="2310 1869 0C4D 903E F419  146A A144 323D EAAC DF45"
-ARG SHA256_HASH="84f1bee2e92a9dadb41d95ecc64113e4d3def86224de774cd92003add8c4f570"
+ARG SHA256_HASH="ce41e13317d35d7a5b3f34605487429391a41eca77b2006edd11e9453432c609"
 
 ENV UID=991 GID=991
 
