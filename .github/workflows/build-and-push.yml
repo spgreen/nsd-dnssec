@@ -1,5 +1,8 @@
 name: Build and publish NSD image
 
+# Deploy this file to .github/workflows/build-and-push.yml in the
+# spgreen/nsd-dnssec repository — GitHub only runs workflows from that path.
+#
 # Automates the manual process from the ops runbook: bump NSD_VERSION /
 # SHA256_HASH in the Dockerfile, build, smoke-test, and push. The image tag
 # is read directly from the Dockerfile's ARG NSD_VERSION rather than typed
@@ -7,7 +10,7 @@ name: Build and publish NSD image
 # the image actually contains.
 #
 # Triggers on any push to master that touches the Dockerfile, and on pull
-# requests that touch it (build + smoke-test only, no push - secrets aren't
+# requests that touch it (build + smoke-test only, no push — secrets aren't
 # available to fork PRs anyway). workflow_dispatch allows a manual re-run,
 # e.g. to retry a push after a registry outage without an empty commit.
 
@@ -29,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Extract NSD_VERSION from Dockerfile
         id: version
@@ -44,7 +47,7 @@ jobs:
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
 
       - name: Build image (local, not pushed yet)
         run: |
@@ -63,7 +66,7 @@ jobs:
 
       - name: Log in to Docker Hub
         if: github.event_name != 'pull_request'
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
